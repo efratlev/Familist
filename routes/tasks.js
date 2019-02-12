@@ -206,4 +206,20 @@ router.get('/', function (req, res, next) {
         }
     })
 });
+
+//get filtered tasks
+router.post('/filter', function (req, res, next) {
+    let conditions={};
+    if (req.body.priority){
+        conditions.priority=priority;
+    }
+    Tasks.find(conditions, function (err, tasks) {
+        if (err) {
+            res.status('400');
+        }
+        else {
+            res.json(tasks);
+        }
+    })
+});
 module.exports = router;
